@@ -12,10 +12,11 @@ namespace w11_3
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public decimal ImportoIniziale { get; set; }
-        private decimal _saldo = 0;
+        
         public decimal import = 0;
         decimal[] array=new decimal[10];
 
+        private decimal _saldo = 0;
         public decimal Saldo
         {
             get { return _saldo; }
@@ -28,6 +29,7 @@ namespace w11_3
             set { contoAperto = value;}
         }
         public double Scelta { get; set; }
+
 
         public ContoCorrente() { }
         public ContoCorrente(double scelta,string nome, string cognome, decimal importo)
@@ -49,22 +51,17 @@ namespace w11_3
 
         public void Versamento(decimal importo)
         {
-            for (int i = 0; i < array.Length; i++)
-            {
-                array[i] = importo; 
-            }
-           
-      
-            _saldo += importo ;
-            Console.WriteLine("Conto: " + importo);
+          
+             _saldo += importo;
+            Console.WriteLine("Conto: " + _saldo);
             via();
         }
 
         public void Prelievo(decimal importo)
         {
-          
+           
             _saldo -= importo;
-            Console.WriteLine("Conto: " + importo);
+            Console.WriteLine("Conto: " + _saldo);
             via();
         }
         public void via()
@@ -93,21 +90,30 @@ namespace w11_3
                 string cognome = Console.ReadLine();
                 Console.WriteLine("Importo iniziale minimo 1000$");
                 decimal importo =decimal.Parse( Console.ReadLine());
-
+                
                 ContoCorrente contoCorrente1 = new ContoCorrente(scelta, nome, cognome,importo);
+                contoCorrente1.contoAperto = true;
                 Console.WriteLine("Conto corrente n° 2383899 intestato a " + nome + " " + cognome + " aperto correttamente");
-
+                via();
             }
 
             else if (scelta == 2)
             {
-
+                if (contoAperto==false)
+                {
                 Console.WriteLine(" ");
                 Console.WriteLine("Inserisci la cifra dell'importo da versare");
                 decimal importo = decimal.Parse(Console.ReadLine());
-
-                ContoCorrente contoCorrente1 = new ContoCorrente(scelta, importo);
-               contoCorrente1.Versamento(importo);
+                    _saldo += importo;
+                    Console.WriteLine("Conto: " + _saldo);
+                    via();
+                }
+                else
+                {
+                    Console.WriteLine("Conto non esistente creare un conto prima di eseguire l'operazione");
+                    via();
+                }
+             
                
 
             }
@@ -118,14 +124,19 @@ namespace w11_3
                 Console.WriteLine(" ");
                 Console.WriteLine("Inserisci la cifra dell'importo da prelevare");
                 decimal importo = decimal.Parse(Console.ReadLine());
-
-                ContoCorrente contoCorrente1 = new ContoCorrente(scelta, importo);
-                contoCorrente1.Prelievo(importo);
+                _saldo -= importo;
+                Console.WriteLine("Conto: " + _saldo);
+                via();
             }
             else if (scelta == 4)
             {
 
-                Console.WriteLine("Esci");
+                Console.WriteLine("Chiusura programma in corso");
+                Environment.Exit(0);
+            }
+            else
+            {
+                via();
             }
 
 
