@@ -89,20 +89,21 @@ namespace w11_3
                 Console.WriteLine("Inserisci cognome");
                 string cognome = Console.ReadLine();
                 Console.WriteLine("Importo iniziale minimo 1000$");
-                decimal importo =decimal.Parse( Console.ReadLine());
+                decimal importoIniziale =decimal.Parse( Console.ReadLine());
                 
-                ContoCorrente contoCorrente1 = new ContoCorrente(scelta, nome, cognome,importo);
-                contoCorrente1.contoAperto = true;
+                ContoCorrente contoCorrente1 = new ContoCorrente(scelta, nome, cognome,importoIniziale);
+                contoAperto = true;
                 Console.WriteLine("Conto corrente n° 2383899 intestato a " + nome + " " + cognome + " aperto correttamente");
                 via();
             }
 
             else if (scelta == 2)
             {
-                if (contoAperto==false)
+                if (contoAperto==true)
                 {
                 Console.WriteLine(" ");
                 Console.WriteLine("Inserisci la cifra dell'importo da versare");
+
                 decimal importo = decimal.Parse(Console.ReadLine());
                     _saldo += importo;
                     Console.WriteLine("Conto: " + _saldo);
@@ -115,18 +116,35 @@ namespace w11_3
                 }
              
                
-
+                  
             }
             else if (scelta == 3)
             {
+                if (contoAperto == true)
+                {
 
-
-                Console.WriteLine(" ");
+                  
                 Console.WriteLine("Inserisci la cifra dell'importo da prelevare");
                 decimal importo = decimal.Parse(Console.ReadLine());
+                if (-_saldo==0||importo>_saldo)
+                {
+                    Console.WriteLine("Saldo non disponibile per il prelievo");
+                    via();
+                } else {
+                Console.WriteLine(" ");
                 _saldo -= importo;
                 Console.WriteLine("Conto: " + _saldo);
                 via();
+                }
+                }
+                else
+                {
+                    Console.WriteLine("Conto non esistente creare un conto prima di eseguire l'operazione");
+                    via();
+                }
+
+               
+               
             }
             else if (scelta == 4)
             {
