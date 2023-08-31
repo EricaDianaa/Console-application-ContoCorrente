@@ -11,8 +11,11 @@ namespace w11_3
         static void Main(string[] args)
         {
             ContoCorrente contoCorrente = new ContoCorrente();
-            contoCorrente.via();
+            //contoCorrente.via();
 
+            Array arr = new Array();
+            //arr.AddName();
+            arr.AddNumber();
 
           
             Console.ReadLine();

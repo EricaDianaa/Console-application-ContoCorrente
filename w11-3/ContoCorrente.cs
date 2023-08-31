@@ -39,30 +39,10 @@ namespace w11_3
             Cognome=cognome;
             ImportoIniziale = importo;
         }
-
         public ContoCorrente( double scelta,decimal importo)
         {
             Scelta = scelta;
             import = importo;
-        }
-
-
-
-
-        public void Versamento(decimal importo)
-        {
-          
-             _saldo += importo;
-            Console.WriteLine("Conto: " + _saldo);
-            via();
-        }
-
-        public void Prelievo(decimal importo)
-        {
-           
-            _saldo -= importo;
-            Console.WriteLine("Conto: " + _saldo);
-            via();
         }
         public void via()
         {
@@ -82,7 +62,9 @@ namespace w11_3
 
             if (scelta == 1)
             {
-                //Apri conto
+                if (contoAperto == false)
+                {
+                 //Apri conto
                 Console.WriteLine(" ");
                 Console.WriteLine("Inserisci nome");
                 string nome = Console.ReadLine();
@@ -95,6 +77,12 @@ namespace w11_3
                 contoAperto = true;
                 Console.WriteLine("Conto corrente n° 2383899 intestato a " + nome + " " + cognome + " aperto correttamente");
                 via();
+                }
+               
+                else
+                {
+                    Console.WriteLine("Conto corrente gia aperto");
+                }
             }
 
             else if (scelta == 2)
